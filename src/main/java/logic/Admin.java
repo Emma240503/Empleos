@@ -11,12 +11,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Empresa {
+public class Admin {
     @jakarta.persistence.Id
     private String id;
     private String correo;
     private String nombre;
     private String descripcion;
-    private String ubicacion;
     private int telefono;
 }
