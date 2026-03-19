@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Puesto {
 
     @jakarta.persistence.Id
-    private String empresa_id;
+    private String id;
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;

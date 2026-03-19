@@ -21,4 +21,5 @@ public class Caracteristica {
     private Caracteristica idPadre;
     private String descripcion;
     private String nombre;
+    private int nivel;
 }
