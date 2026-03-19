@@ -1,4 +1,4 @@
-package presentation.admin;
+package presentation.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import logic.Service;
 
 @org.springframework.stereotype.Controller("admin")
-public class Controller {
+public class AdminController {
     @Autowired
     private Service service;
 
