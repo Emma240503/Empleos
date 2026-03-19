@@ -34,7 +34,7 @@ public class Service {
         admins.save(admin);
     }
     public void puestosAdd(Puesto puesto) {
-        if(puestos.existsById(puesto.getEmpresa_id())) {
+        if(puestos.existsById(puesto.getId())) {
             throw new IllegalArgumentException("El puesto ya existe");
         }
         puestos.save(puesto);
