@@ -1,33 +1,44 @@
 package logic;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.ArrayList;
 
-@Entity
+import java.time.Instant;
+
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
 @Table(name = "puesto")
-
 public class Puesto {
-
-    @jakarta.persistence.Id
+    @Id
+    @Size(max = 255)
+    @Column(name = "id", nullable = false)
     private String id;
 
-    public String getId() {
-        return id;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "empresa_id")
-    private Empresa empresa;
+    @Size(max = 45)
+    @Column(name = "descripcion", length = 45)
     private String descripcion;
-    private double salario;
-    private boolean activo = true;
-    private ArrayList<Caracteristica> caracteristicasAll = new ArrayList<>();
+
+    @Size(max = 45)
+    @Column(name = "salario", length = 45)
+    private String salario;
+
+    @Column(name = "activo")
+    private Byte activo;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "Empresa_id", nullable = false)
+    private Empresa empresa;
+
+    @Column(name = "fecha_registro")
+    private Instant fechaRegistro;
+
+    @Size(max = 45)
+    @Column(name = "tipo", length = 45)
+    private String tipo;
+
 }

@@ -1,30 +1,48 @@
 package logic;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Table(name = "empresa")
 public class Empresa {
-    @jakarta.persistence.Id
+    @Id
+    @Size(max = 160)
+    @Column(name = "id", nullable = false, length = 160)
     private String id;
-    public String getId() { return id; }
+
+    @Size(max = 45)
+    @Column(name = "correo", length = 45)
     private String correo;
-    private String nombre;
+
+    @Size(max = 255)
+    @Column(name = "descripcion")
     private String descripcion;
+
+    @Size(max = 45)
+    @Column(name = "nombre", length = 45)
+    private String nombre;
+
+    @Size(max = 120)
+    @Column(name = "ubicacion", length = 120)
     private String ubicacion;
-    private int telefono;
-    private String clave;
-    private boolean aprobada = false;
 
-    public String getNombre() { return nombre; }
+    @Column(name = "telefono")
+    private Integer telefono;
 
-    public String getClave() { return clave; }
-    public boolean isAprobada() { return aprobada; }
+    @Size(max = 255)
+    @Column(name = "contrasenna")
+    private String contrasenna;
+
+    @Size(max = 45)
+    @Column(name = "estado", length = 45)
+    private String estado;
+
 }

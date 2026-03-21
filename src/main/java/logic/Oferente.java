@@ -1,39 +1,56 @@
 package logic;
 
-import logic.Caracteristica;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.ArrayList;
 
-@Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Table(name = "oferente")
 public class Oferente {
-    @jakarta.persistence.Id
+    @Id
+    @Size(max = 160)
+    @Column(name = "id", nullable = false, length = 160)
     private String id;
 
-    public String getId() {
-        return id;
-    }
-
+    @Size(max = 45)
+    @Column(name = "correo", length = 45)
     private String correo;
+
+    @Size(max = 45)
+    @Column(name = "nombre", length = 45)
     private String nombre;
+
+    @Size(max = 45)
+    @Column(name = "primerApellido", length = 45)
     private String primerApellido;
+
+    @Size(max = 45)
+    @Column(name = "ubicacion", length = 45)
     private String ubicacion;
+
+    @Size(max = 45)
+    @Column(name = "nacionalidad", length = 45)
     private String nacionalidad;
-    private int telefono;
-    private String clave;
-    private boolean aprobado = false;
 
-    public String getNombre() { return nombre; }
+    @Column(name = "telefono")
+    private Integer telefono;
 
-    public String getClave() { return clave; }
-    public boolean isAprobado() { return aprobado; }
+    @Size(max = 255)
+    @Column(name = "contrasenna")
+    private String contrasenna;
 
-    private ArrayList<Caracteristica> caracteristicas;
+    @Size(max = 255)
+    @Column(name = "curriculum")
+    private String curriculum;
+
+    @Size(max = 45)
+    @Column(name = "estado", length = 45)
+    private String estado;
+
 }
