@@ -70,4 +70,23 @@ public class Service {
         return puestos.findTop5ByTipoAndActivoOrderByFechaRegistroDesc("publico", (byte) 1);
     }
     //
+
+    //
+
+    public Iterable<Empresa> empresasPendientes() {
+        return empresas.findByEstado("pendiente");
+    }
+    public void aprobarEmpresa(String id) {
+        Empresa e = empresas.findById(id).orElseThrow();
+        e.setEstado("aprobada");
+        empresas.save(e);
+    }
+    public Iterable<Oferente> oferentesPendientes() {
+        return oferentes.findByEstado("pendiente");
+    }
+    public void aprobarOferente(String id) {
+        Oferente o = oferentes.findById(id).orElseThrow();
+        o.setEstado("aprobado");
+        oferentes.save(o);
+    }
 }
