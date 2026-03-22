@@ -69,4 +69,5 @@ public class Service {
     public List<Puesto> getUltimosPuestosPublicos() {
         return puestos.findTop5ByTipoAndActivoOrderByFechaRegistroDesc("publico", (byte) 1);
     }
+    //
 }
