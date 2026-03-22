@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence">
+    <persistence-unit name="default">
+        <class>logic.Admin</class>
+        <class>logic.Caracteristica</class>
+        <class>logic.Empresa</class>
+        <class>logic.Oferente</class>
+        <class>logic.OferenteHasCaracteristica</class>
+        <class>logic.Puesto</class>
+        <class>logic.PuestoHasCaracteristica</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    </persistence-unit>
+</persistence>

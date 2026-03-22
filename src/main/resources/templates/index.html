@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BolsaEmpleo – Inicio</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            background: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: #222;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            height: 48px;
+            gap: 24px;
+        }
+        .nav-brand { color: #fff; font-weight: bold; font-size: 15px; text-decoration: none; }
+        nav a { color: #ccc; text-decoration: none; font-size: 13px; }
+        nav a:hover { color: #fff; }
+        .nav-right { margin-left: auto; }
+
+        /* MAIN */
+        main { flex: 1; padding: 32px 40px; }
+        h1 { font-size: 22px; font-weight: normal; margin-bottom: 4px; }
+        .subtitulo { color: #666; font-size: 13px; margin-bottom: 24px; }
+
+        /* GRID DE CARDS */
+        .puestos-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        /* CARD */
+        .puesto-card {
+            position: relative;
+            background: #e8e8e8;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 16px;
+            width: 220px;
+        }
+        .puesto-card .empresa-nombre { font-weight: bold; font-size: 13px; margin-bottom: 2px; }
+        .puesto-card .puesto-desc { font-size: 13px; color: #444; margin-bottom: 8px; }
+        .puesto-card .salario { font-size: 13px; margin-bottom: 12px; }
+        .btn-detalle {
+            display: inline-block;
+            background: #3a7bd5;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 16px;
+            font-size: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+        .btn-detalle:hover { background: #2f6abf; }
+
+        /* HOVER DETALLE — CSS puro, sin JavaScript */
+        .hover-detalle {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 100;
+            background: #fff;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            padding: 10px 14px;
+            width: 220px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            font-size: 12px;
+        }
+        .puesto-card:hover .hover-detalle { display: block; }
+        .hover-detalle strong { display: block; margin-bottom: 6px; color: #333; }
+        .hover-detalle ul { list-style: disc; padding-left: 16px; color: #444; }
+        .hover-detalle li { margin-bottom: 3px; }
+        .sin-caract { color: #888; font-style: italic; }
+
+        /* FOOTER */
+        footer {
+            background: #222;
+            color: #ccc;
+            font-size: 12px;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        footer p:first-child { color: #fff; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a class="nav-brand" th:href="@{/static}">BolsaEmpleo</a>
+    <a th:href="@{/puestos/buscar}">Buscar puestos</a>
+    <a th:href="@{/registro/empresa}">Registro Empresa</a>
+    <a th:href="@{/registro/oferente}">Registro Oferente</a>
+    <a th:href="@{/login}" class="nav-right">Login</a>
+</nav>
+
+<main>
+    <h1>Bolsa de Empleo</h1>
+    <p class="subtitulo">Últimos 5 puestos públicos</p>
+
+    <div class="puestos-grid">
+
+        <div class="puesto-card" th:each="puesto : ${puestos}">
+            <p class="empresa-nombre" th:text="${puesto.empresa.nombre}">Empresa</p>
+            <p class="puesto-desc"   th:text="${puesto.descripcion}">Descripción</p>
+            <p class="salario">
+                € <span th:text="${puesto.salario}">0.00</span>
+            </p>
+            <a class="btn-detalle" th:href="@{/puestos/{id}(id=${puesto.id})}">Ver detalle</a>
+
+            <!-- Panel que aparece al hacer hover (CSS puro) -->
+            <div class="hover-detalle">
+                <strong th:text="${puesto.descripcion}">Puesto</strong>
+                <ul th:if="${!puesto.caracteristicas.isEmpty()}">
+                    <li th:each="c : ${puesto.caracteristicas}">
+                        <span th:text="${c.caracteristicaCaracteristica.nombre}">Característica</span>
+                        (nivel <span th:text="${c.nivel}">0</span>)
+                    </li>
+                </ul>
+                <p class="sin-caract" th:if="${puesto.caracteristicas.isEmpty()}">
+                    Sin características registradas
+                </p>
+            </div>
+        </div>
+
+        <!-- Mensaje si no hay puestos -->
+        <p th:if="${#lists.isEmpty(puestos)}" style="color:#666;">
+            No hay puestos públicos registrados aún.
+        </p>
+
+    </div>
+</main>
+
+<footer>
+    <div>
+        <p>Bolsa de Empleo</p>
+        <p>Total Soft Inc.</p>
+    </div>
+    <div style="text-align:right">
+        <p>Contacto: info@bolsaempleo.local</p>
+        <p>Créditos: Equipo de desarrollo</p>
+    </div>
+</footer>
+
+</body>
+</html>

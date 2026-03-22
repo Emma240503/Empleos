@@ -3,6 +3,8 @@ package logic;
 import data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @org.springframework.stereotype.Service
 
 public class Service {
@@ -62,5 +64,9 @@ public class Service {
     }
     public Oferente findOferenteByCorreo(String correo) {
         return oferentes.findByCorreo(correo);
+    }
+
+    public List<Puesto> getUltimosPuestosPublicos() {
+        return puestos.findTop5ByTipoAndActivoOrderByFechaRegistroDesc("publico", (byte) 1);
     }
 }
