@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface PuestoRepository extends CrudRepository<Puesto, String> {
     List<Puesto> findTop5ByTipoAndActivoOrderByFechaRegistroDesc(String tipo, Byte activo);
+    Iterable<Puesto> findByEmpresa_Id(String empresaId);
 }

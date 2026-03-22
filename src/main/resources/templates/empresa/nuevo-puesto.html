@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Empresa – Publicar puesto</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; flex-direction: column; min-height: 100vh; color: #333; }
+    nav { background: #222; display: flex; align-items: center; padding: 0 20px; height: 48px; gap: 24px; }
+    .nav-brand { color: #fff; font-weight: bold; font-size: 15px; text-decoration: none; }
+    nav a { color: #ccc; text-decoration: none; font-size: 13px; }
+    nav a:hover { color: #fff; }
+    .nav-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+    .btn-salir { background: #555; color: #fff; border: none; border-radius: 3px; padding: 4px 12px; font-size: 12px; text-decoration: none; }
+    main { flex: 1; padding: 32px 40px; }
+    .card { background: #e8e8e8; border: 1px solid #ccc; border-radius: 4px; padding: 32px 40px; max-width: 600px; }
+    h1 { font-size: 20px; font-weight: normal; margin-bottom: 20px; }
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 13px; margin-bottom: 4px; color: #444; }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 7px 10px; border: 1px solid #aaa;
+      border-radius: 3px; font-size: 13px; background: #fff; font-family: Arial, sans-serif;
+    }
+    .caract-row { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+    .caract-row select { flex: 1; }
+    .caract-row input { width: 80px; }
+    .btn-add { background: #555; color: #fff; border: none; border-radius: 3px; padding: 5px 12px; font-size: 12px; cursor: pointer; margin-bottom: 14px; }
+    .btn { background: #3a7bd5; color: #fff; border: none; border-radius: 3px; padding: 8px 22px; font-size: 13px; cursor: pointer; }
+    .btn:hover { background: #2f6abf; }
+    footer { background: #222; color: #ccc; font-size: 12px; padding: 12px 20px; display: flex; justify-content: space-between; margin-top: auto; }
+    footer p:first-child { color: #fff; font-weight: bold; }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" th:href="@{/empresa/dashboard}">BolsaEmpleo</a>
+  <a th:href="@{/empresa/puestos}">Mis puestos</a>
+  <a th:href="@{/empresa/puestos/nuevo}">Publicar puesto</a>
+  <div class="nav-right">
+    <a class="btn-salir" th:href="@{/logout}">Salir</a>
+  </div>
+</nav>
+<main>
+  <div class="card">
+    <h1>Publicar nuevo puesto</h1>
+    <form th:action="@{/empresa/puestos/nuevo}" method="post">
+      <div class="field">
+        <label>Descripción del puesto</label>
+        <input type="text" name="descripcion" required>
+      </div>
+      <div class="field">
+        <label>Salario ofrecido</label>
+        <input type="text" name="salario" required>
+      </div>
+      <div class="field">
+        <label>Tipo de publicación</label>
+        <select name="tipo">
+          <option value="publico">Público</option>
+          <option value="privado">Privado</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Características requeridas</label>
+        <div class="caract-row">
+          <select name="caracteristicaIds">
+            <option value="">-- Seleccionar --</option>
+            <option th:each="c : ${caracteristicas}"
+                    th:value="${c.caracteristicaId}"
+                    th:text="${c.nombre}"></option>
+          </select>
+          <input type="number" name="niveles" min="1" max="5" value="1" placeholder="Nivel">
+        </div>
+      </div>
+      <button type="submit" class="btn">Publicar</button>
+    </form>
+  </div>
+</main>
+<footer>
+  <div><p>Bolsa de Empleo</p><p>Total Soft Inc.</p></div>
+  <div style="text-align:right"><p>Contacto: info@bolsaempleo.local</p><p>Créditos: Equipo de desarrollo</p></div>
+</footer>
+</body>
+</html>

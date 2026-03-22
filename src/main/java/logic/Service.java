@@ -4,10 +4,20 @@ import data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import data.OferenteHasCaracteristicaRepository;
+
+import java.util.ArrayList;
+import java.util.UUID;
+import java.time.Instant;
+
 
 @org.springframework.stereotype.Service
 
 public class Service {
+    @Autowired
+    private PuestoHasCaracteristicaRepository puestoHasCaracteristicaRepo;
+    @Autowired
+    private OferenteHasCaracteristicaRepository ohcRepo;
     @Autowired
     private EmpresasRepository empresas;
     @Autowired
@@ -88,5 +98,84 @@ public class Service {
         Oferente o = oferentes.findById(id).orElseThrow();
         o.setEstado("aprobado");
         oferentes.save(o);
+    }
+
+    public Iterable<Puesto> puestosPorEmpresa(String empresaId) {
+        return puestos.findByEmpresa_Id(empresaId);
+    }
+
+    public void crearPuesto(String empresaId, String descripcion, String salario, String tipo,
+                            List<String> caracteristicaIds, List<Integer> niveles) {
+        Empresa empresa = empresas.findById(empresaId).orElseThrow();
+        Puesto p = new Puesto();
+        p.setId(UUID.randomUUID().toString());
+        p.setDescripcion(descripcion);
+        p.setSalario(salario);
+        p.setTipo(tipo);
+        p.setActivo((byte) 1);
+        p.setFechaRegistro(Instant.now());
+        p.setEmpresa(empresa);
+        puestos.save(p);
+
+        if (caracteristicaIds != null) {
+            for (int i = 0; i < caracteristicaIds.size(); i++) {
+                Caracteristica c = carecteristica.findById(caracteristicaIds.get(i)).orElse(null);
+                if (c == null) continue;
+                PuestoHasCaracteristica phc = new PuestoHasCaracteristica();
+                PuestoHasCaracteristicaId phcId = new PuestoHasCaracteristicaId();
+                phcId.setPuestoId(p.getId());
+                phcId.setCaracteristicaCaracteristicaId(c.getCaracteristicaId());
+                phc.setId(phcId);
+                phc.setPuesto(p);
+                phc.setCaracteristicaCaracteristica(c);
+                phc.setNivel(niveles != null && i < niveles.size() ? niveles.get(i) : 1);
+                puestoHasCaracteristicaRepo.save(phc);
+            }
+        }
+    }
+
+    public void desactivarPuesto(String id) {
+        Puesto p = puestos.findById(id).orElseThrow();
+        p.setActivo((byte) 0);
+        puestos.save(p);
+    }
+
+    public Puesto findPuestoById(String id) {
+        return puestos.findById(id).orElse(null);
+    }
+
+    public Oferente findOferenteById(String id) {
+        return oferentes.findById(id).orElse(null);
+    }
+
+    public Iterable<OferenteHasCaracteristica> habilidadesDeOferente(String oferenteId) {
+        return ohcRepo.findByOferente_Id(oferenteId);
+    }
+
+    public List<CandidatoDTO> buscarCandidatos(String puestoId) {
+        Puesto puesto = puestos.findById(puestoId).orElseThrow();
+        List<PuestoHasCaracteristica> requisitos = puesto.getCaracteristicas();
+        Iterable<Oferente> todosOferentes = oferentes.findByEstado("aprobado");
+
+        List<CandidatoDTO> resultado = new ArrayList<>();
+        for (Oferente o : todosOferentes) {
+            List<OferenteHasCaracteristica> habilidades = (List<OferenteHasCaracteristica>)ohcRepo.findByOferente_Id(o.getId());
+            int cumplidos = 0;
+            for (PuestoHasCaracteristica req : requisitos) {
+                for (OferenteHasCaracteristica hab : habilidades) {
+                    if (hab.getCaracteristicaCaracteristica().getCaracteristicaId()
+                            .equals(req.getCaracteristicaCaracteristica().getCaracteristicaId())
+                            && hab.getNivel() >= req.getNivel()) {
+                        cumplidos++;
+                        break;
+                    }
+                }
+            }
+            if (requisitos.size() > 0) {
+                double porcentaje = (cumplidos * 100.0) / requisitos.size();
+                resultado.add(new CandidatoDTO(o, cumplidos, requisitos.size(), porcentaje));
+            }
+        }
+        return resultado;
     }
 }
