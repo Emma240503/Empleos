@@ -198,4 +198,25 @@ public class Service {
     public void eliminarHabilidad(String id) {
         ohcRepo.deleteById(id);
     }
+
+    //Caracteristica
+
+    public Iterable<Caracteristica> getRaices() {
+        return carecteristica.findByPadreIsNull();
+    }
+    public Iterable<Caracteristica> getHijos(String padreId) {
+        return carecteristica.findByPadre_CaracteristicaId(padreId);
+    }
+    public Caracteristica findCaracteristicaById(String id) {
+        return carecteristica.findById(id).orElse(null);
+    }
+    public void crearCaracteristica(String nombre, String padreId) {
+        Caracteristica c = new Caracteristica();
+        c.setCaracteristicaId(UUID.randomUUID().toString());
+        c.setNombre(nombre);
+        if (padreId != null && !padreId.isEmpty()) {
+            c.setPadre(carecteristica.findById(padreId).orElse(null));
+        }
+        carecteristica.save(c);
+    }
 }
