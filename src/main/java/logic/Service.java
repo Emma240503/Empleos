@@ -219,4 +219,20 @@ public class Service {
         }
         carecteristica.save(c);
     }
+    //
+    //Puesto
+    public List<Puesto> buscarPuestosPublicos(List<String> caracteristicaIds) {
+        Iterable<Puesto> todos = puestos.findAll();
+        List<Puesto> resultado = new ArrayList<>();
+        for (Puesto p : todos) {
+            if (!"publico".equals(p.getTipo()) || p.getActivo() != 1) continue;
+            for (PuestoHasCaracteristica phc : p.getCaracteristicas()) {
+                if (caracteristicaIds.contains(phc.getCaracteristicaCaracteristica().getCaracteristicaId())) {
+                    resultado.add(p);
+                    break;
+                }
+            }
+        }
+        return resultado;
+    }
 }

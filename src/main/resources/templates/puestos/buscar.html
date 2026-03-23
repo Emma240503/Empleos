@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>BolsaEmpleo – Buscar puestos</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; flex-direction: column; min-height: 100vh; color: #333; }
+    nav { background: #222; display: flex; align-items: center; padding: 0 20px; height: 48px; gap: 24px; }
+    .nav-brand { color: #fff; font-weight: bold; font-size: 15px; text-decoration: none; }
+    nav a { color: #ccc; text-decoration: none; font-size: 13px; }
+    nav a:hover { color: #fff; }
+    .nav-right { margin-left: auto; }
+    main { flex: 1; padding: 32px 40px; }
+    h1 { font-size: 20px; font-weight: normal; margin-bottom: 20px; }
+    .layout { display: flex; gap: 40px; align-items: flex-start; }
+    .form-panel { background: #e8e8e8; border: 1px solid #ccc; border-radius: 4px; padding: 20px 24px; min-width: 260px; }
+    .form-panel h2 { font-size: 15px; font-weight: normal; margin-bottom: 14px; }
+    .caract-lista { list-style: none; margin-bottom: 14px; }
+    .caract-lista li { padding: 4px 0; font-size: 13px; }
+    .caract-lista input[type=checkbox] { margin-right: 6px; }
+    .btn-row { display: flex; gap: 8px; }
+    .btn-buscar { background: #3a7bd5; color: #fff; border: none; border-radius: 3px; padding: 7px 18px; font-size: 13px; cursor: pointer; }
+    .btn-buscar:hover { background: #2f6abf; }
+    .btn-limpiar { background: #555; color: #fff; border: none; border-radius: 3px; padding: 7px 18px; font-size: 13px; text-decoration: none; }
+    .btn-limpiar:hover { background: #333; }
+    .resultados { flex: 1; }
+    .resultados h2 { font-size: 16px; font-weight: normal; margin-bottom: 14px; }
+    .puesto-card { background: #e8e8e8; border: 1px solid #ccc; border-radius: 4px; padding: 14px 18px; margin-bottom: 12px; }
+    .puesto-card .empresa { font-weight: bold; font-size: 13px; }
+    .puesto-card .desc { font-size: 13px; color: #444; margin: 4px 0; }
+    .puesto-card .salario { font-size: 13px; }
+    .vacio { color: #888; font-style: italic; }
+    footer { background: #222; color: #ccc; font-size: 12px; padding: 12px 20px; display: flex; justify-content: space-between; margin-top: auto; }
+    footer p:first-child { color: #fff; font-weight: bold; }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" th:href="@{/}">BolsaEmpleo</a>
+  <a th:href="@{/puestos/buscar}">Buscar puestos</a>
+  <a th:href="@{/registro/empresa}">Registro Empresa</a>
+  <a th:href="@{/registro/oferente}">Registro Oferente</a>
+  <a th:href="@{/login}" class="nav-right">Login</a>
+</nav>
+<main>
+  <h1>Buscar puestos por características</h1>
+  <div class="layout">
+    <div class="form-panel">
+      <form th:action="@{/puestos/buscar}" method="get">
+        <ul class="caract-lista">
+          <li th:each="c : ${caracteristicas}">
+            <label>
+              <input type="checkbox" name="caracteristicaIds" th:value="${c.caracteristicaId}">
+              <span th:text="${c.nombre}">Nombre</span>
+            </label>
+          </li>
+        </ul>
+        <div class="btn-row">
+          <button type="submit" class="btn-buscar">Buscar</button>
+          <a class="btn-limpiar" th:href="@{/puestos/buscar}">Limpiar</a>
+        </div>
+      </form>
+    </div>
+    <div class="resultados" th:if="${buscado}">
+      <h2>Resultados</h2>
+      <div th:each="p : ${resultados}" class="puesto-card">
+        <p class="empresa" th:text="${p.empresa.nombre}"></p>
+        <p class="desc" th:text="${p.descripcion}"></p>
+        <p class="salario">Salario: <span th:text="${p.salario}"></span></p>
+      </div>
+      <p class="vacio" th:if="${#lists.isEmpty(resultados)}">No se encontraron puestos.</p>
+    </div>
+  </div>
+</main>
+<footer>
+  <div><p>Bolsa de Empleo</p><p>Total Soft Inc.</p></div>
+  <div style="text-align:right"><p>Contacto: info@bolsaempleo.local</p><p>Créditos: Equipo de desarrollo</p></div>
+</footer>
+</body>
+</html>
