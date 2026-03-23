@@ -119,7 +119,10 @@ public class Service {
 
         if (caracteristicaIds != null) {
             for (int i = 0; i < caracteristicaIds.size(); i++) {
-                Caracteristica c = carecteristica.findById(caracteristicaIds.get(i)).orElse(null);
+                String cid = caracteristicaIds.get(i);
+                if (cid == null || cid.isEmpty()) continue;
+                Caracteristica c = carecteristica.findById(cid).orElse(null);
+                if (c == null) continue;
                 if (c == null) continue;
                 PuestoHasCaracteristica phc = new PuestoHasCaracteristica();
                 PuestoHasCaracteristicaId phcId = new PuestoHasCaracteristicaId();

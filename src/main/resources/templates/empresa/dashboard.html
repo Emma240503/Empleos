@@ -36,4 +36,15 @@
 </nav>
 <main>
   <h1>Empresa – Dashboard</h1>
-  <p class="
+  <p class="subtitulo">Desde aquí podés administrar tus puestos y buscar candidatos.</p>
+  <div class="btn-grid">
+    <a class="btn" th:href="@{/empresa/puestos}">Ver mis puestos</a>
+    <a class="btn" th:href="@{/empresa/puestos/nuevo}">Publicar nuevo puesto</a>
+  </div>
+</main>
+<footer>
+  <div><p>Bolsa de Empleo</p><p>Total Soft Inc.</p></div>
+  <div style="text-align:right"><p>Contacto: info@bolsaempleo.local</p><p>Créditos: Equipo de desarrollo</p></div>
+</footer>
+</body>
+</html>
