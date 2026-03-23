@@ -181,4 +181,21 @@ public class Service {
         }
         return resultado;
     }
+
+    //Oferente
+
+    public void agregarHabilidad(String oferenteId, String caracteristicaId, int nivel) {
+        Oferente o = oferentes.findById(oferenteId).orElseThrow();
+        Caracteristica c = carecteristica.findById(caracteristicaId).orElseThrow();
+        OferenteHasCaracteristica ohc = new OferenteHasCaracteristica();
+        ohc.setId(UUID.randomUUID().toString());
+        ohc.setOferente(o);
+        ohc.setCaracteristicaCaracteristica(c);
+        ohc.setNivel(nivel);
+        ohcRepo.save(ohc);
+    }
+
+    public void eliminarHabilidad(String id) {
+        ohcRepo.deleteById(id);
+    }
 }
