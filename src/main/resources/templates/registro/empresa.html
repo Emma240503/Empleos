@@ -1,43 +1,9 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>BolsaEmpleo – Registro Empresa</title>
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Arial, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; flex-direction: column; min-height: 100vh; color: #333; }
-        nav { background: #222; display: flex; align-items: center; padding: 0 20px; height: 48px; gap: 24px; }
-        .nav-brand { color: #fff; font-weight: bold; font-size: 15px; text-decoration: none; }
-        nav a { color: #ccc; text-decoration: none; font-size: 13px; }
-        nav a:hover { color: #fff; }
-        .nav-right { margin-left: auto; }
-        main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 16px; }
-        .card { background: #e8e8e8; border: 1px solid #ccc; border-radius: 4px; padding: 32px 40px 40px; width: 400px; }
-        .card h1 { font-size: 20px; font-weight: normal; margin-bottom: 20px; text-align: center; }
-        .field { margin-bottom: 14px; }
-        .field label { display: block; font-size: 13px; margin-bottom: 4px; color: #444; }
-        .field input, .field textarea {
-            width: 100%; padding: 7px 10px;
-            border: 1px solid #aaa; border-radius: 3px;
-            font-size: 13px; background: #fff; outline: none; font-family: Arial, sans-serif;
-        }
-        .field input:focus, .field textarea:focus { border-color: #4a90d9; box-shadow: 0 0 0 2px rgba(74,144,217,0.25); }
-        .alert-error { background: #fdd; border: 1px solid #f99; border-radius: 3px; padding: 8px 10px; font-size: 12px; color: #c00; margin-bottom: 14px; }
-        .alert-ok { background: #dfd; border: 1px solid #9c9; border-radius: 3px; padding: 8px 10px; font-size: 12px; color: #060; margin-bottom: 14px; }
-        .btn { background: #3a7bd5; color: #fff; border: none; border-radius: 3px; padding: 8px 22px; font-size: 13px; cursor: pointer; width: 100%; margin-top: 4px; }
-        .btn:hover { background: #2f6abf; }
-        footer { background: #222; color: #ccc; font-size: 12px; padding: 12px 20px; display: flex; justify-content: space-between; }
-        footer p:first-child { color: #fff; font-weight: bold; }
-    </style>
-</head>
+<head th:replace="~{fragments :: head('BolsaEmpleo - Registro Empresa', '/css/registro.css')}"></head>
 <body>
-<nav>
-    <a class="nav-brand" th:href="@{/}">BolsaEmpleo</a>
-    <a th:href="@{/puestos/buscar}">Buscar puestos</a>
-    <a th:href="@{/registro/empresa}">Registro Empresa</a>
-    <a th:href="@{/registro/oferente}">Registro Oferente</a>
-    <a th:href="@{/login}" class="nav-right">Login</a>
-</nav>
+<header th:replace="~{fragments :: header}"></header>
+<nav th:replace="~{fragments :: nav}"></nav>
 <main>
     <div class="card">
         <h1>Registro de Empresa</h1>
@@ -47,36 +13,33 @@
 
         <form th:action="@{/registro/empresa}" method="post">
             <div class="field">
-                <label>Nombre de la empresa</label>
-                <input type="text" name="nombre" required>
+                <label for="nombre">Nombre de la empresa</label>
+                <input id="nombre" type="text" name="nombre" required>
             </div>
             <div class="field">
-                <label>Ubicación</label>
-                <input type="text" name="ubicacion" required>
+                <label for="ubicacion">Ubicación</label>
+                <input id="ubicacion" type="text" name="ubicacion" required>
             </div>
             <div class="field">
-                <label>Correo electrónico</label>
-                <input type="email" name="correo" required>
+                <label for="correo">Correo electrónico</label>
+                <input id="correo" type="email" name="correo" required>
             </div>
             <div class="field">
-                <label>Teléfono</label>
-                <input type="number" name="telefono" required>
+                <label for="telefono">Teléfono</label>
+                <input id="telefono" type="number" name="telefono" required>
             </div>
             <div class="field">
-                <label>Descripción</label>
-                <textarea name="descripcion" rows="3"></textarea>
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion" rows="3"></textarea>
             </div>
             <div class="field">
-                <label>Contraseña</label>
-                <input type="password" name="contrasenna" required>
+                <label for="contrasenna">Contraseña</label>
+                <input id="contrasenna" type="password" name="contrasenna" required>
             </div>
-            <button type="submit" class="btn">Registrarse</button>
+            <button type="submit" class="btn-registro">Registrarse</button>
         </form>
     </div>
 </main>
-<footer>
-    <div><p>Bolsa de Empleo</p><p>Total Soft Inc.</p></div>
-    <div style="text-align:right"><p>Contacto: info@bolsaempleo.local</p><p>Créditos: Equipo de desarrollo</p></div>
-</footer>
+<footer th:replace="~{fragments :: footer}"></footer>
 </body>
 </html>

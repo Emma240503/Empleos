@@ -1,63 +1,38 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin – Empresas pendientes</title>
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Arial, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; flex-direction: column; min-height: 100vh; color: #333; }
-        nav { background: #222; display: flex; align-items: center; padding: 0 20px; height: 48px; gap: 24px; }
-        .nav-brand { color: #fff; font-weight: bold; font-size: 15px; text-decoration: none; }
-        nav a { color: #ccc; text-decoration: none; font-size: 13px; }
-        nav a:hover { color: #fff; }
-        .nav-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
-        .btn-salir { background: #555; color: #fff; border: none; border-radius: 3px; padding: 4px 12px; font-size: 12px; text-decoration: none; }
-        .btn-salir:hover { background: #777; }
-        main { flex: 1; padding: 32px 40px; }
-        h1 { font-size: 22px; font-weight: normal; margin-bottom: 20px; }
-        table { border-collapse: collapse; width: 100%; background: #e8e8e8; border: 1px solid #ccc; }
-        th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #ccc; font-size: 13px; }
-        th { background: #d8d8d8; font-weight: bold; }
-        tr:last-child td { border-bottom: none; }
-        .btn-aprobar { background: #2e7d32; color: #fff; border: none; border-radius: 3px; padding: 5px 14px; font-size: 12px; cursor: pointer; }
-        .btn-aprobar:hover { background: #1b5e20; }
-        .vacio { color: #888; font-style: italic; margin-top: 12px; }
-        footer { background: #222; color: #ccc; font-size: 12px; padding: 12px 20px; display: flex; justify-content: space-between; margin-top: auto; }
-        footer p:first-child { color: #fff; font-weight: bold; }
-    </style>
-</head>
+<head th:replace="~{fragments :: head('Admin - Empresas pendientes', '/css/admin-empresas-pendientes.css')}"></head>
 <body>
+<header th:replace="~{fragments :: header}"></header>
 <nav>
-    <a class="nav-brand" th:href="@{/admin/dashboard}">BolsaEmpleo</a>
-    <a th:href="@{/admin/empresas/pendientes}">Empresas pendientes</a>
     <a th:href="@{/admin/oferentes/pendientes}">Oferentes pendientes</a>
+    <a th:href="@{/admin/caracteristicas}">Caracteristicas</a>
     <div class="nav-right">
+        <span class="nav-user" th:if="${nombre != null}" th:text="${nombre}">Admin</span>
         <a class="btn-salir" th:href="@{/logout}">Salir</a>
     </div>
 </nav>
 <main>
     <h1>Empresas pendientes</h1>
-    <table th:if="${#lists.size(empresas) > 0}">
-        <tr>
-            <th>Correo</th>
-            <th>Nombre</th>
-            <th>Acción</th>
-        </tr>
-        <tr th:each="e : ${empresas}">
-            <td th:text="${e.correo}"></td>
-            <td th:text="${e.nombre}"></td>
-            <td>
-                <form th:action="@{/admin/empresas/aprobar/{id}(id=${e.id})}" method="post">
-                    <button type="submit" class="btn-aprobar">Aprobar</button>
-                </form>
-            </td>
-        </tr>
-    </table>
+    <div class="table-wrap" th:if="${#lists.size(empresas) > 0}">
+        <table>
+            <tr>
+                <th>Correo</th>
+                <th>Nombre</th>
+                <th>Accion</th>
+            </tr>
+            <tr th:each="e : ${empresas}">
+                <td th:text="${e.correo}"></td>
+                <td th:text="${e.nombre}"></td>
+                <td>
+                    <form th:action="@{/admin/empresas/aprobar/{id}(id=${e.id})}" method="post">
+                        <button type="submit" class="btn-aprobar">Aprobar</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
     <p class="vacio" th:if="${#lists.size(empresas) == 0}">No hay empresas pendientes.</p>
 </main>
-<footer>
-    <div><p>Bolsa de Empleo</p><p>Total Soft Inc.</p></div>
-    <div style="text-align:right"><p>Contacto: info@bolsaempleo.local</p><p>Créditos: Equipo de desarrollo</p></div>
-</footer>
+<footer th:replace="~{fragments :: footer}"></footer>
 </body>
 </html>

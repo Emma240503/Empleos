@@ -1,0 +1,94 @@
+main {
+    flex: 1;
+    width: min(1100px, 100%);
+    padding: 32px 40px;
+}
+
+h1 {
+    margin: 0 0 18px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2a37;
+}
+
+.nav-user {
+    color: #d1d5db;
+    font-size: 13px;
+}
+
+.btn-salir {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border: 1px solid #6b7280;
+    border-radius: 4px;
+    font-size: 12px;
+    background: #374151;
+    color: #fff;
+}
+
+.btn-salir:hover {
+    background: #4b5563;
+    border-color: #4b5563;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(31, 42, 55, 0.12);
+}
+
+th,
+td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #d1d5db;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background: #e5e7eb;
+    font-weight: 700;
+    color: #1f2a37;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.btn-aprobar {
+    background: #2f8b3a;
+    border: 1px solid #256d2d;
+    color: #fff;
+    border-radius: 4px;
+    padding: 7px 14px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.btn-aprobar:hover {
+    background: #276f30;
+    border-color: #205827;
+}
+
+.vacio {
+    margin-top: 10px;
+    color: #6b7280;
+    font-style: italic;
+}
+
+@media (max-width: 900px) {
+    main {
+        padding: 24px 16px;
+    }
+}
+
