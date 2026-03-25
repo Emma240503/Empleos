@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="head(pageTitle, extraCss)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle} ?: 'BolsaEmpleo'">BolsaEmpleo</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"    type="text/css">
+    <link rel="stylesheet" th:href="@{/css/layout.css}"  type="text/css">
+    <link rel="stylesheet" th:href="@{/css/buttons.css}" type="text/css">
+    <link rel="stylesheet" th:if="${extraCss != null}" th:href="@{${extraCss}}" type="text/css">
+</head>
+
+<header th:fragment="header">
+    <div class="header-brand">
+        <img class="header-logo" th:src="@{/images/logo.png}" src="/images/logo.png" alt="Logo BolsaEmpleo">
+        <span class="header-title">BolsaEmpleo</span>
+    </div>
+</header>
+
+<nav th:fragment="nav">
+    <a th:href="@{/puestos/buscar}">Buscar puestos</a>
+    <a th:href="@{/registro/empresa}">Empresas</a>
+    <a th:href="@{/registro/oferente}">Oferentes</a>
+
+    <div class="nav-right">
+        <a th:href="@{/login}">Login</a>
+    </div>
+</nav>
+
+<footer th:fragment="footer">
+    <div>
+        <p>Bolsa de Empleo</p>
+        <p>Total Soft Inc.</p>
+    </div>
+    <div class="footer-right">
+        <p>Contacto: info@bolsaempleo.local</p>
+        <p>Créditos: Equipo de desarrollo</p>
+    </div>
+</footer>
+
+</html>
