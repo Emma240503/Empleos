@@ -1,49 +1,17 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Oferente – Mis habilidades</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, sans-serif; font-size: 14px; background: #f0f0f0; display: flex; flex-direction: column; min-height: 100vh; color: #333; }
-    nav { background: #222; display: flex; align-items: center; padding: 0 20px; height: 48px; gap: 24px; }
-    .nav-brand { color: #fff; font-weight: bold; font-size: 15px; text-decoration: none; }
-    nav a { color: #ccc; text-decoration: none; font-size: 13px; }
-    nav a:hover { color: #fff; }
-    .nav-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
-    .btn-salir { background: #555; color: #fff; border: none; border-radius: 3px; padding: 4px 12px; font-size: 12px; text-decoration: none; }
-    .btn-salir:hover { background: #777; }
-    main { flex: 1; padding: 32px 40px; display: flex; gap: 40px; }
-    h1 { font-size: 22px; font-weight: normal; margin-bottom: 16px; }
-    .panel { flex: 1; }
-    table { border-collapse: collapse; width: 100%; background: #e8e8e8; border: 1px solid #ccc; margin-bottom: 16px; }
-    th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #ccc; font-size: 13px; }
-    th { background: #d8d8d8; font-weight: bold; }
-    tr:last-child td { border-bottom: none; }
-    .btn-eliminar { background: #c62828; color: #fff; border: none; border-radius: 3px; padding: 4px 10px; font-size: 12px; cursor: pointer; }
-    .btn-eliminar:hover { background: #b71c1c; }
-    .agregar-card { background: #e8e8e8; border: 1px solid #ccc; border-radius: 4px; padding: 20px 24px; max-width: 280px; }
-    .agregar-card h2 { font-size: 15px; font-weight: normal; margin-bottom: 14px; }
-    .field { margin-bottom: 12px; }
-    .field label { display: block; font-size: 13px; margin-bottom: 4px; color: #444; }
-    .field select, .field input { width: 100%; padding: 7px 10px; border: 1px solid #aaa; border-radius: 3px; font-size: 13px; background: #fff; }
-    .btn-agregar { background: #3a7bd5; color: #fff; border: none; border-radius: 3px; padding: 7px 20px; font-size: 13px; cursor: pointer; width: 100%; }
-    .btn-agregar:hover { background: #2f6abf; }
-    .vacio { color: #888; font-style: italic; }
-    footer { background: #222; color: #ccc; font-size: 12px; padding: 12px 20px; display: flex; justify-content: space-between; margin-top: auto; }
-    footer p:first-child { color: #fff; font-weight: bold; }
-  </style>
-</head>
+<head th:replace="~{fragments :: head('Oferente - Mis habilidades', '/css/oferente-habilidades.css')}"></head>
 <body>
+<header th:replace="~{fragments :: header}"></header>
 <nav>
-  <a class="nav-brand" th:href="@{/oferente/dashboard}">BolsaEmpleo</a>
-  <a th:href="@{/oferente/habilidades}">Mis habilidades</a>
+  <a th:href="@{/oferente/dashboard}">Dashboard</a>
   <div class="nav-right">
+    <span class="nav-user" th:text="${nombre}">Oferente</span>
     <a class="btn-salir" th:href="@{/logout}">Salir</a>
   </div>
 </nav>
 <main>
-  <div class="panel">
+  <section class="panel card">
     <h1>Mis habilidades</h1>
     <table th:if="${#lists.size(habilidades) > 0}">
       <tr>
@@ -61,15 +29,15 @@
         </td>
       </tr>
     </table>
-    <p class="vacio" th:if="${#lists.size(habilidades) == 0}">No tenés habilidades registradas aún.</p>
-  </div>
+    <p class="vacio" th:if="${#lists.size(habilidades) == 0}">No tenes habilidades registradas aun.</p>
+  </section>
 
-  <div class="agregar-card">
+  <aside class="agregar-card card">
     <h2>Agregar habilidad</h2>
     <form th:action="@{/oferente/habilidades/agregar}" method="post">
       <div class="field">
-        <label>Característica</label>
-        <select name="caracteristicaId" required>
+        <label for="caracteristicaId">Característica</label>
+        <select id="caracteristicaId" name="caracteristicaId" required>
           <option value="">-- Seleccionar --</option>
           <option th:each="c : ${caracteristicas}"
                   th:value="${c.caracteristicaId}"
@@ -77,16 +45,13 @@
         </select>
       </div>
       <div class="field">
-        <label>Nivel (1-5)</label>
-        <input type="number" name="nivel" min="1" max="5" value="1" required>
+        <label for="nivel">Nivel (1-5)</label>
+        <input id="nivel" type="number" name="nivel" min="1" max="5" value="1" required>
       </div>
       <button type="submit" class="btn-agregar">Agregar</button>
     </form>
-  </div>
+  </aside>
 </main>
-<footer>
-  <div><p>Bolsa de Empleo</p><p>Total Soft Inc.</p></div>
-  <div style="text-align:right"><p>Contacto: info@bolsaempleo.local</p><p>Créditos: Equipo de desarrollo</p></div>
-</footer>
+<footer th:replace="~{fragments :: footer}"></footer>
 </body>
 </html>

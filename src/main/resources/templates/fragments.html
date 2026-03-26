@@ -12,10 +12,10 @@
 </head>
 
 <header th:fragment="header">
-    <div class="header-brand">
+    <a class="header-brand" th:href="@{/}">
         <img class="header-logo" th:src="@{/images/logo.png}" src="/images/logo.png" alt="Logo BolsaEmpleo">
         <span class="header-title">BolsaEmpleo</span>
-    </div>
+    </a>
 </header>
 
 <nav th:fragment="nav">
@@ -24,7 +24,11 @@
     <a th:href="@{/registro/oferente}">Oferentes</a>
 
     <div class="nav-right">
-        <a th:href="@{/login}">Login</a>
+        <a class="btn-salir" th:if="${session.usuarioRol == null}" th:href="@{/login}">Login</a>
+        <div class="session-info" th:if="${session.usuarioRol != null}">
+            <span class="nav-user" th:text="${session.usuarioNombre + ' (' + session.usuarioRol + ')'}">Usuario</span>
+            <a class="btn-salir" th:href="@{/logout}">Salir</a>
+        </div>
     </div>
 </nav>
 

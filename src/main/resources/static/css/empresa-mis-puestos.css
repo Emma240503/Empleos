@@ -1,0 +1,146 @@
+main {
+    flex: 1;
+    width: min(1120px, 100%);
+    padding: 32px 40px;
+}
+
+.nav-user {
+    color: #d1d5db;
+    font-size: 13px;
+    align-self: center;
+}
+
+h1 {
+    margin: 0 0 16px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2a37;
+}
+
+.btn-nuevo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    padding: 9px 16px;
+    border-radius: 6px;
+    border: 1px solid #2d5b8a;
+    background: #3f70b7;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.btn-nuevo:hover {
+    color: #fff;
+    background: #315f9d;
+    border-color: #254a79;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid #d8dee9;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(31, 42, 55, 0.08);
+}
+
+th,
+td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+th {
+    background: #eef2f7;
+    font-weight: 700;
+    color: #1f2a37;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.badge-activo,
+.badge-inactivo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.badge-activo {
+    background: #2f8b3a;
+}
+
+.badge-inactivo {
+    background: #6b7280;
+}
+
+.acciones {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-accion {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    min-height: 34px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-desactivar {
+    background: #d92d20;
+    border-color: #b42318;
+}
+
+.btn-desactivar:hover {
+    background: #b42318;
+}
+
+.btn-candidatos {
+    background: #3f70b7;
+    border-color: #2d5b8a;
+}
+
+.btn-candidatos:hover {
+    background: #315f9d;
+    border-color: #254a79;
+}
+
+.vacio {
+    margin-top: 6px;
+    color: #6b7280;
+    font-style: italic;
+}
+
+@media (max-width: 900px) {
+    main {
+        padding: 24px 16px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+

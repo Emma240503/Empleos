@@ -1,0 +1,153 @@
+main {
+    width: min(1120px, 100%);
+    padding: 32px 40px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 24px;
+}
+
+.nav-user {
+    color: #d1d5db;
+    font-size: 13px;
+    align-self: center;
+}
+
+.btn-salir {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border: 1px solid #6b7280;
+    border-radius: 4px;
+    font-size: 12px;
+    background: #374151;
+    color: #fff;
+}
+
+.btn-salir:hover {
+    background: #4b5563;
+    border-color: #4b5563;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #d8dee9;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(31, 42, 55, 0.08);
+}
+
+.panel {
+    padding: 22px;
+}
+
+h1 {
+    margin: 0 0 14px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2a37;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+th,
+td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+th {
+    background: #eef2f7;
+    color: #1f2a37;
+    font-weight: 700;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.vacio {
+    color: #6b7280;
+    font-style: italic;
+}
+
+.btn-eliminar {
+    border: 1px solid #b42318;
+    border-radius: 6px;
+    background: #d92d20;
+    color: #fff;
+    font-weight: 600;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+.btn-eliminar:hover {
+    background: #b42318;
+}
+
+.agregar-card {
+    padding: 20px;
+    align-self: start;
+}
+
+.agregar-card h2 {
+    margin: 0 0 14px;
+    font-size: 20px;
+    color: #1f2a37;
+}
+
+.field {
+    margin-bottom: 12px;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 6px;
+    color: #374151;
+    font-size: 14px;
+}
+
+.field select,
+.field input {
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+}
+
+.btn-agregar {
+    width: 100%;
+    border: 1px solid #2d5b8a;
+    border-radius: 6px;
+    background: #3f70b7;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    min-height: 42px;
+    cursor: pointer;
+}
+
+.btn-agregar:hover {
+    background: #315f9d;
+    border-color: #254a79;
+}
+
+@media (max-width: 900px) {
+    main {
+        grid-template-columns: 1fr;
+        padding: 24px 16px;
+    }
+
+    .agregar-card {
+        width: 100%;
+    }
+}
+

@@ -44,14 +44,6 @@ public class Puesto {
     @Column(name = "tipo", length = 45)
     private String tipo;
 
-
-
-    // src/main/java/logic/Puesto.java
-// Agrega estos imports y el campo al final de la clase:
-
-
-
-    // Dentro de la clase Puesto, agrega:
     @OneToMany(mappedBy = "puesto", fetch = FetchType.EAGER)
     private List<PuestoHasCaracteristica> caracteristicas = new ArrayList<>();
 

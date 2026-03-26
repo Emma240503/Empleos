@@ -21,6 +21,8 @@ header {
     gap: 8px;
     align-items: center;
     font-weight: 700;
+    color: #fff;
+    text-decoration: none;
 }
 
 .header-logo {
@@ -42,6 +44,35 @@ nav {
     margin-left: auto;
     display: flex;
     gap: 12px;
+}
+
+.session-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-user {
+    color: #d1d5db;
+    font-size: 13px;
+}
+
+.btn-salir {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border: 1px solid #6b7280;
+    border-radius: 4px;
+    font-size: 12px;
+    background: #374151;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-salir:hover {
+    background: #4b5563;
+    border-color: #4b5563;
 }
 
 footer {

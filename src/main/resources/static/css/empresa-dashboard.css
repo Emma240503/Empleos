@@ -1,7 +1,13 @@
 main {
     flex: 1;
+    width: min(980px, 100%);
     padding: 32px 40px;
-    width: min(1100px, 100%);
+}
+
+.nav-user {
+    color: #d1d5db;
+    font-size: 13px;
+    align-self: center;
 }
 
 h1 {
@@ -17,29 +23,6 @@ h1 {
     font-size: 14px;
 }
 
-.nav-user {
-    color: #d1d5db;
-    font-size: 13px;
-    align-self: center;
-}
-
-.btn-salir {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 12px;
-    border: 1px solid #6b7280;
-    border-radius: 4px;
-    font-size: 12px;
-    background: #374151;
-    color: #fff;
-}
-
-.btn-salir:hover {
-    background: #4b5563;
-    border-color: #4b5563;
-}
-
 .btn-grid {
     display: flex;
     gap: 16px;
@@ -50,34 +33,24 @@ h1 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 220px;
+    min-width: 230px;
     min-height: 50px;
     padding: 12px 20px;
+    border: 1px solid #2d5b8a;
     border-radius: 6px;
-    border-width: 1px;
-    font-size: 20px;
+    background: #3f70b7;
+    color: #fff;
+    font-size: 18px;
     font-weight: 700;
     line-height: 1.1;
-    color: #fff;
-    background: #3f70b7;
-    border-color: #2d5b8a;
     text-align: center;
+    text-decoration: none;
 }
 
 .btn:hover {
     color: #fff;
     background: #315f9d;
     border-color: #254a79;
-}
-
-.btn-green {
-    background: #2f8b3a;
-    border-color: #256d2d;
-}
-
-.btn-green:hover {
-    background: #276f30;
-    border-color: #205827;
 }
 
 @media (max-width: 900px) {

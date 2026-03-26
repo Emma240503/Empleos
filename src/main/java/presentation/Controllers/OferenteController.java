@@ -28,6 +28,7 @@ public class OferenteController {
         String id = (String) session.getAttribute("usuarioId");
         model.addAttribute("habilidades", service.habilidadesDeOferente(id));
         model.addAttribute("caracteristicas", service.carecteristicasAll());
+        model.addAttribute("nombre", session.getAttribute("usuarioNombre"));
         return "oferente/habilidades";
     }
 
