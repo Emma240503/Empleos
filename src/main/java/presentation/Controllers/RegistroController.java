@@ -4,6 +4,7 @@ import logic.Empresa;
 import logic.Oferente;
 import logic.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,9 @@ public class RegistroController {
 
     @Autowired
     private Service service;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // ── EMPRESA ──────────────────────────────────────────
     @GetMapping("/registro/empresa")
@@ -41,7 +45,7 @@ public class RegistroController {
         e.setCorreo(correo);
         e.setTelefono(Integer.parseInt(telefono));
         e.setDescripcion(descripcion);
-        e.setContrasenna(contrasenna);
+        e.setContrasenna(passwordEncoder.encode(contrasenna));
         e.setEstado("pendiente");
         service.empresasAdd(e);
 
@@ -77,7 +81,7 @@ public class RegistroController {
         o.setTelefono(Integer.parseInt(telefono));
         o.setCorreo(correo);
         o.setUbicacion(ubicacion);
-        o.setContrasenna(contrasenna);
+        o.setContrasenna(passwordEncoder.encode(contrasenna));
         o.setEstado("pendiente");
         service.oferentesAdd(o);
 

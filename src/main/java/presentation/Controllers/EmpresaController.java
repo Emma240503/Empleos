@@ -78,8 +78,10 @@ public class EmpresaController {
     @GetMapping("/empresa/candidatos/{id}")
     public String verCandidato(@PathVariable String id, HttpSession session, Model model) {
         if (!"empresa".equals(session.getAttribute("usuarioRol"))) return "redirect:/login";
-        model.addAttribute("oferente", service.findOferenteById(id));
+        Oferente of = service.findOferenteById(id);
+        model.addAttribute("oferente", of);
         model.addAttribute("habilidades", service.habilidadesDeOferente(id));
+        model.addAttribute("Url", of.getCurriculum());
         return "empresa/detalle-candidato";
     }
 }

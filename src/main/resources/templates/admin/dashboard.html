@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments :: head('Admin - Dashboard', '/css/admin-dashboard.css')}"></head>
+<head th:replace="~{fragments :: head('Admin - Dashboard', '/css/Admin/admin-dashboard.css')}"></head>
 <body>
 <header th:replace="~{fragments :: header}"></header>
 <nav>
@@ -20,6 +20,60 @@
         <a class="btn btn-green" th:href="@{/admin/oferentes/pendientes}">Oferentes pendientes</a>
         <a class="btn" th:href="@{/admin/caracteristicas}">Caracteristicas</a>
     </div>
+
+    <section class="list-section">
+        <h2>Todas las empresas</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Ubicacion</th>
+                    <th>Estado</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(empresas)}">
+                    <td colspan="4">No hay empresas registradas.</td>
+                </tr>
+                <tr th:each="e : ${empresas}">
+                    <td th:text="${e.nombre}">Nombre</td>
+                    <td th:text="${e.correo}">correo@empresa.com</td>
+                    <td th:text="${e.ubicacion}">Ubicacion</td>
+                    <td th:text="${e.estado}">pendiente</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="list-section">
+        <h2>Todos los oferentes</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Ubicacion</th>
+                    <th>Estado</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(oferentes)}">
+                    <td colspan="4">No hay oferentes registrados.</td>
+                </tr>
+                <tr th:each="o : ${oferentes}">
+                    <td th:text="${o.nombre + ' ' + o.primerApellido}">Nombre completo</td>
+                    <td th:text="${o.correo}">correo@oferente.com</td>
+                    <td th:text="${o.ubicacion}">Ubicacion</td>
+                    <td th:text="${o.estado}">pendiente</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 </main>
 <footer th:replace="~{fragments :: footer}"></footer>
 </body>

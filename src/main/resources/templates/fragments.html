@@ -22,6 +22,9 @@
     <a th:href="@{/puestos/buscar}">Buscar puestos</a>
     <a th:href="@{/registro/empresa}">Empresas</a>
     <a th:href="@{/registro/oferente}">Oferentes</a>
+    <a th:if="${session.usuarioRol != null and session.usuarioRol == 'oferente'}" th:href="@{/oferente/dashboard}">Dashboard</a>
+    <a th:if="${session.usuarioRol != null and session.usuarioRol == 'empresa'}" th:href="@{/empresa/dashboard}">Dashboard</a>
+    <a th:if="${session.usuarioRol != null and session.usuarioRol == 'admin'}" th:href="@{/admin/dashboard}">Dashboard</a>
 
     <div class="nav-right">
         <a class="btn-salir" th:if="${session.usuarioRol == null}" th:href="@{/login}">Login</a>

@@ -219,6 +219,14 @@ public class Service {
         }
         carecteristica.save(c);
     }
+
+    public void actualizarCurriculumOferente(String oferenteId, String curriculumPath) {
+        Oferente o = oferentes.findById(oferenteId).orElse(null);
+        if (o != null) {
+            o.setCurriculum(curriculumPath);
+            oferentes.save(o);
+        }
+    }
     //
     //Puesto
     public List<Puesto> buscarPuestosPublicos(List<String> caracteristicaIds) {

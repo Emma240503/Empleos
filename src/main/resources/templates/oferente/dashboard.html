@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments :: head('Oferente - Dashboard', '/css/oferente-dashboard.css')}"></head>
+<head th:replace="~{fragments :: head('Oferente - Dashboard', '/css/Oferente/oferente-dashboard.css')}"></head>
 <body>
 <header th:replace="~{fragments :: header}"></header>
 <nav>
@@ -11,12 +11,22 @@
   </div>
 </nav>
 <main>
-  <h1>Oferente</h1>
-  <p class="subtitulo">Administrá tus habilidades y tu CV.</p>
+  <h1>Oferente
+    <p class="subtitulo">Administrá tus habilidades y tu CV.</p>
+  </h1>
   <div class="panel-card">
     <h2>Perfil profesional</h2>
     <p>Mantené tu perfil actualizado para mejorar tus coincidencias con puestos activos.</p>
     <a class="btn" th:href="@{/oferente/habilidades}">Ir a mis habilidades</a>
+  </div>
+
+  <div class="panel-card" th:if="${!tieneCV}">
+    <h2>Curriculum</h2>
+    <p>Manten informado a las empresas de tu trayectoria subiendo tu CV en formato pdf.</p>
+    <form th:action="@{/oferente/subir-cv}" method="post" enctype="multipart/form-data">
+      <input type="file" name="archivo" accept=".pdf" required>
+      <button type="submit" class="btn">Subir CV</button>
+    </form>
   </div>
 </main>
 <footer th:replace="~{fragments :: footer}"></footer>

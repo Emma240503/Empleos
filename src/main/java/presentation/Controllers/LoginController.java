@@ -6,6 +6,7 @@ import logic.Empresa;
 import logic.Oferente;
 import logic.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,9 @@ public class LoginController {
 
     @Autowired
     private Service service;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // GET /login  → muestra el formulario
     @GetMapping("/login")
@@ -46,7 +50,7 @@ public class LoginController {
 
             case "empresa" -> {
                 Empresa empresa = service.findEmpresaByCorreo(usuario);
-                if (empresa == null || !empresa.getContrasenna().equals(clave)) {
+                if (empresa == null || !passwordMatches(clave, empresa.getContrasenna())) {
                     return "redirect:/login?error";
                 }
                 if (!empresa.isAprobada()) {
@@ -60,7 +64,7 @@ public class LoginController {
 
             case "oferente" -> {
                 Oferente oferente = service.findOferenteByCorreo(usuario);
-                if (oferente == null || !oferente.getContrasenna().equals(clave)) {
+                if (oferente == null || !passwordMatches(clave, oferente.getContrasenna())) {
                     return "redirect:/login?error";
                 }
                 if (!oferente.isAprobado()) {
@@ -69,6 +73,7 @@ public class LoginController {
                 session.setAttribute("usuarioRol",  "oferente");
                 session.setAttribute("usuarioId",   oferente.getId());
                 session.setAttribute("usuarioNombre", oferente.getNombre());
+                session.setAttribute("curriculum",  oferente.getCurriculum());
                 return "redirect:/oferente/dashboard";
             }
 
@@ -81,5 +86,14 @@ public class LoginController {
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/login";
+    }
+
+    private boolean passwordMatches(String rawPassword, String storedPassword) {
+        if (storedPassword == null) return false;
+        if (storedPassword.startsWith("$2a$") || storedPassword.startsWith("$2b$") || storedPassword.startsWith("$2y$")) {
+            return passwordEncoder.matches(rawPassword, storedPassword);
+        }
+        // Legacy plaintext support for existing rows not migrated yet.
+        return storedPassword.equals(rawPassword);
     }
 }

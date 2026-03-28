@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments :: head('Empresa - Detalle candidato', '/css/empresa-detalle-candidato.css')}"></head>
+<head th:replace="~{fragments :: head('Empresa - Detalle candidato', '/css/Empresa/empresa-detalle-candidato.css')}"></head>
 <body>
 <header th:replace="~{fragments :: header}"></header>
 <nav>
@@ -22,6 +22,8 @@
       <p><strong>Teléfono:</strong> <span th:text="${oferente.telefono}"></span></p>
       <p><strong>Residencia:</strong> <span th:text="${oferente.ubicacion}"></span></p>
     </div>
+    <h2>Curriculum</h2>
+    <a class="btn-volver" th:if="${Url} != null" th:href="@{${Url}}" download>Descargar CV</a>
     <h2>Habilidades</h2>
     <table>
       <tr><th>Característica</th><th>Nivel</th></tr>

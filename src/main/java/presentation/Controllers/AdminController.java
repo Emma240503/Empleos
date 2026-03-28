@@ -1,8 +1,6 @@
 package presentation.Controllers;
 
 import jakarta.servlet.http.HttpSession;
-import logic.Empresa;
-import logic.Oferente;
 import logic.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +20,8 @@ public class AdminController {
     public String dashboard(HttpSession session, Model model) {
         if (!"admin".equals(session.getAttribute("usuarioRol"))) return "redirect:/login";
         model.addAttribute("nombre", session.getAttribute("usuarioNombre"));
+        model.addAttribute("empresas", service.empresasAll());
+        model.addAttribute("oferentes", service.oferentesAll());
         return "admin/dashboard";
     }
 
